@@ -1,8 +1,19 @@
 # PR size status bar (VS Code / Cursor)
 
-Shows how many files differ between your current branch and **`main`** using `git diff main...HEAD`, with a green / yellow / red indicator in the status bar.
+Shows how many files differ between your current branch and **`main`** using `git diff main...HEAD`, with a green (≤ 20 files changed) / yellow (21–30 files changed) / red indicator (> 30 files changes) in the status bar. Customize the default values for showing the indicator in `pr-size-statusbar.js`.
 
 Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands)** extension (`anweber.statusbar-commands`).
+
+## Screenshots
+
+### Green indicator
+<img width="1505" height="941" alt="Screenshot 2026-03-25 at 09 43 52" src="https://github.com/user-attachments/assets/47785146-4fc5-465e-83b2-581cede16c23" />
+
+### Yellow indicator
+<img width="1508" height="947" alt="Screenshot 2026-03-25 at 09 52 48" src="https://github.com/user-attachments/assets/c9174423-300d-45a7-82d4-8581f6da4785" />
+
+### Red indicator
+<img width="1507" height="947" alt="Screenshot 2026-03-25 at 09 46 13" src="https://github.com/user-attachments/assets/3b03877a-13ae-4ecb-a295-179fdd3870c3" />
 
 ## Requirements
 
@@ -61,9 +72,6 @@ The module is evaluated once on first `require`; if Git was not ready yet, reloa
 
 ## Thresholds and errors
 
-Edit **`pr-size-statusbar.js`**:
-
-- Default: ≤ 20 green, 21–30 yellow, &gt; 30 red.
 - On failure (e.g. no `main`), the bar shows **`main not found`**.
 
 ## Troubleshooting
