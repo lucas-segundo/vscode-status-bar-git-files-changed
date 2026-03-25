@@ -38,8 +38,6 @@ Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?i
 | `pr-size-statusbar-git-events.js` | Supplies Git-related `scriptEvents` subscribers for statusbar-commands (see below).                     |
 | `settings.json` (fragment)        | Registers the status bar item, `scriptEvents`, and the inline `script` that `require`s the files above. |
 
-For a **standalone repository**, copy these files into `.vscode/` at the project root and merge the `statusbar_command.commands` entry into your workspace `settings.json` (or keep a dedicated `settings.json` if this repo is only the snippet).
-
 ## What gets measured
 
 The script runs (in the first workspace folder):
