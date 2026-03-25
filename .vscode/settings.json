@@ -1,0 +1,19 @@
+{
+  "statusbar_command.commands": [
+    {
+      "id": "sbc_pr_size_monitor",
+      "text": "🔄 Calc PR size...",
+      "tooltip": "The size of the pull request compared to main",
+      "alignment": "left",
+      "priority": 100,
+      "command": "workbench.view.scm",
+      "scriptEvents": [
+        "vscode.window.onDidChangeWindowState",
+        "vscode.workspace.onDidChangeWorkspaceFolders",
+        "require(require('path').join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar-git-events.js')).onDidOpenRepository",
+        "require(require('path').join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar-git-events.js')).onDidChangeRepositoryState"
+      ],
+      "script": "const path = require('path');require(path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar.js'))(vscode, statusBarItem);"
+    }
+  ]
+}
