@@ -10,10 +10,10 @@
       "scriptEvents": [
         "vscode.window.onDidChangeWindowState",
         "vscode.workspace.onDidChangeWorkspaceFolders",
-        "require(require('path').join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar-git-events.js')).onDidOpenRepository",
-        "require(require('path').join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar-git-events.js')).onDidChangeRepositoryState"
+        "require(require('path').join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar-git-events.cjs')).onDidOpenRepository",
+        "require(require('path').join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar-git-events.cjs')).onDidChangeRepositoryState"
       ],
-      "script": "const path = require('path');require(path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar.js'))(vscode, statusBarItem);"
+      "script": "const path = require('path');require(path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, '.vscode', 'pr-size-statusbar.cjs'))(vscode, statusBarItem);"
     }
   ]
 }
