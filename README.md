@@ -2,7 +2,7 @@
 
 Shows how many files differ between your current branch and **`main`** using `git diff main...HEAD`, with a green (≤ 20 files changed) / yellow (21–30 files changed) / red indicator (> 30 files changes) in the status bar. Customize the default values for showing the indicator in `pr-size-statusbar.js`.
 
-Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands)** extension (`anweber.statusbar-commands`).
+Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands)** extension (`anweber.statusbar-commands`) to allow changes on vscode/cursor status bar.
 
 ## Screenshots
 
@@ -24,6 +24,12 @@ Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?i
 - Workspace with at least one folder open (scripts use `workspaceFolders[0]`)
 - Trusted workspace if your editor requires it for extension script execution
 
+## Installation
+1. Install [statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands).
+2. Copy `pr-size-statusbar.js` and `pr-size-statusbar-git-events.js` into **`.vscode/`**.
+3. Add the `statusbar_command.commands` block from `settings.json` into your workspace settings. Adjust or remove unrelated keys (formatters, etc.) if you only want the status bar.
+4. Reload the window if needed.
+
 ## Files in this bundle
 
 | File                              | Purpose                                                                                                 |
@@ -33,13 +39,6 @@ Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?i
 | `settings.json` (fragment)        | Registers the status bar item, `scriptEvents`, and the inline `script` that `require`s the files above. |
 
 For a **standalone repository**, copy these files into `.vscode/` at the project root and merge the `statusbar_command.commands` entry into your workspace `settings.json` (or keep a dedicated `settings.json` if this repo is only the snippet).
-
-## Install in another project
-
-1. Install **statusbar-commands**.
-2. Copy `pr-size-statusbar.js` and `pr-size-statusbar-git-events.js` into **`.vscode/`**.
-3. Add the `statusbar_command.commands` block from `settings.json` into your workspace settings. Adjust or remove unrelated keys (formatters, etc.) if you only want the status bar.
-4. Reload the window if needed.
 
 ## What gets measured
 
