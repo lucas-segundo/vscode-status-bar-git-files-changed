@@ -1,6 +1,6 @@
 # PR size status bar (VS Code / Cursor)
 
-Shows how many files differ between your current branch and **`main`** using `git diff main...HEAD`, with a green (≤ 20 files changed) / yellow (21–30 files changed) / red indicator (> 30 files changes) in the status bar. Customize the default values for showing the indicator in `pr-size-statusbar.js`.
+Shows how many files differ between your current branch and **`main`** using `git diff main...HEAD`, with a green (≤ 20 files changed) / yellow (21–30 files changed) / red indicator (> 30 files changes) in the status bar. Customize the default values for showing the indicator in `pr-size-statusbar.cjs`.
 
 Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands)** extension (`anweber.statusbar-commands`) to allow changes on vscode/cursor status bar.
 
@@ -20,23 +20,23 @@ Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?i
 - VS Code or Cursor
 - Extension: **statusbar-commands** (`anweber.statusbar-commands`)
 - Built-in Git extension (`vscode.git`) for optional Git-driven refresh events
-- Local branch **`main`** (or change the git command in `pr-size-statusbar.js`)
+- Local branch **`main`** (or change the git command in `pr-size-statusbar.cjs`)
 - Workspace with at least one folder open (scripts use `workspaceFolders[0]`)
 - Trusted workspace if your editor requires it for extension script execution
 
 ## Installation
 1. Install [statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands).
-2. Copy `pr-size-statusbar.js` and `pr-size-statusbar-git-events.js` into **`.vscode/`**.
-3. Add the `statusbar_command.commands` block from `settings.json` into your workspace settings. Adjust or remove unrelated keys (formatters, etc.) if you only want the status bar.
+2. Copy `pr-size-statusbar.cjs` and `pr-size-statusbar-git-events.cjs` into **`.vscode/`**.
+3. Add the `statusbar_command.commands` block from `settings.cjson` into your workspace settings. Adjust or remove unrelated keys (formatters, etc.) if you only want the status bar.
 4. Reload the window if needed.
 
 ## Files in this bundle
 
 | File                              | Purpose                                                                                                 |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `pr-size-statusbar.js`            | Runs `git diff --name-only main...HEAD \| wc -l` and sets `statusBarItem.text`.                         |
-| `pr-size-statusbar-git-events.js` | Supplies Git-related `scriptEvents` subscribers for statusbar-commands (see below).                     |
-| `settings.json` (fragment)        | Registers the status bar item, `scriptEvents`, and the inline `script` that `require`s the files above. |
+| `pr-size-statusbar.cjs`            | Runs `git diff --name-only main...HEAD \| wc -l` and sets `statusBarItem.text`.                         |
+| `pr-size-statusbar-git-events.cjs` | Supplies Git-related `scriptEvents` subscribers for statusbar-commands (see below).                     |
+| `settings.cjson` (fragment)        | Registers the status bar item, `scriptEvents`, and the inline `script` that `require`s the files above. |
 
 ## What gets measured
 
@@ -50,15 +50,15 @@ That is the **three-dot** diff vs `main` (commits on your branch relative to `ma
 
 ## When the label refreshes
 
-From `settings.json` `scriptEvents`:
+From `settings.cjson` `scriptEvents`:
 
 - **`vscode.window.onDidChangeWindowState`** — e.g. after git in the terminal, when you focus the editor again.
 - **`vscode.workspace.onDidChangeWorkspaceFolders`** — workspace roots change.
-- **`onDidOpenRepository`** / **`onDidChangeRepositoryState`** — loaded from `pr-size-statusbar-git-events.js` (see next section).
+- **`onDidOpenRepository`** / **`onDidChangeRepositoryState`** — loaded from `pr-size-statusbar-git-events.cjs` (see next section).
 
 Clicking the item runs **`workbench.view.scm`** (Source Control). Change `command` in settings to use another command.
 
-## Git events module (`pr-size-statusbar-git-events.js`)
+## Git events module (`pr-size-statusbar-git-events.cjs`)
 
 `main()` resolves the Git extension API and `repositories[0]`.
 
