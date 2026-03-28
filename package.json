@@ -1,0 +1,60 @@
+{
+  "name": "branch-size-monitor",
+  "displayName": "Branch Size Monitor",
+  "description": "Shows how many files differ between your branch and a base branch in the status bar.",
+  "version": "0.2.0",
+  "icon": "icon.png",
+  "publisher": "lucassegundo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucassegundo/vscode-status-bar-git-files-changed.git"
+  },
+  "packageManager": "pnpm@10.27.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Branch Size Monitor",
+      "properties": {
+        "statusBar.baseBranch": {
+          "type": "string",
+          "default": "main",
+          "description": "Base branch for comparing the size of the current branch."
+        },
+        "statusBar.yellowThreshold": {
+          "type": "number",
+          "default": 20,
+          "minimum": 0,
+          "description": "Above this file count (and at or below the red threshold), the indicator is yellow."
+        },
+        "statusBar.redThreshold": {
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "description": "Above this file count, the indicator is red."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.26.1",
+    "typescript": "^5.3.3"
+  }
+}

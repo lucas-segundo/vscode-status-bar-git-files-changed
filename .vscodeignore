@@ -1,0 +1,39 @@
+# Editor / local dev (not needed at runtime)
+.vscode/**
+.vscode-test/**
+
+# TypeScript sources and maps (published code lives in out/)
+src/**
+**/tsconfig.json
+**/*.map
+
+# Install metadata (vsce does not ship devDependencies the same way; keep this lean)
+node_modules/**
+
+# Lockfiles
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Git and CI (not needed in the VSIX)
+.git/**
+.gitignore
+.github/**
+
+# Build output you do not ship
+*.vsix
+
+# OS / env / logs
+.DS_Store
+.env
+.env.*
+*.log
+.pnpm-store/**
+
+# Optional tooling configs if you add them later
+.editorconfig
+.prettier*
+eslint.config.*
+.eslintrc*
+coverage/**
+.nyc_output/**

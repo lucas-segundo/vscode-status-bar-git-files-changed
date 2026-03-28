@@ -1,80 +1,43 @@
-# PR size status bar (VS Code / Cursor)
+# Branch Size Monitor
 
-Shows how many files differ between your current branch and **`main`** using `git diff main...HEAD`, with a green (≤ 20 files changed) / yellow (21–30 files changed) / red indicator (> 30 files changes) in the status bar. Customize the default values for showing the indicator in `pr-size-statusbar.cjs`.
+See at a glance how many files differ between your **current branch** and a **base branch** (for example `main`)—right in the status bar. Handy for keeping pull requests and branch scope easy to spot while you work and make it smaller.
 
-Requires the **[statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands)** extension (`anweber.statusbar-commands`) to allow changes on vscode/cursor status bar.
+## Features
+
+- **Live count** of files changed versus the base branch using Git’s three-dot diff (`base...HEAD`), so it reflects what would be unique to your branch.
+- **Color-style indicator** in the bar: green when the count is within your “comfort” range, yellow is the warning zone, red is the danger zone. Thresholds are configurable, but choose wisely.
+- **Click the status item** to open **Source Control**.
+- **Updates when Git state changes**, using the built-in Git extension’s repository events.
+- **Workspace-aware**: uses the first workspace folder as the Git working directory.
 
 ## Screenshots
 
 ### Green indicator
-<img width="1505" height="941" alt="Screenshot 2026-03-25 at 09 43 52" src="https://github.com/user-attachments/assets/47785146-4fc5-465e-83b2-581cede16c23" />
+<img width="753" height="471" alt="Green indicator" src="https://github.com/user-attachments/assets/47785146-4fc5-465e-83b2-581cede16c23" />
 
 ### Yellow indicator
-<img width="1508" height="947" alt="Screenshot 2026-03-25 at 09 52 48" src="https://github.com/user-attachments/assets/c9174423-300d-45a7-82d4-8581f6da4785" />
+<img width="753" height="471" alt="Yellow indicator" src="https://github.com/user-attachments/assets/c9174423-300d-45a7-82d4-8581f6da4785" />
 
 ### Red indicator
-<img width="1507" height="947" alt="Screenshot 2026-03-25 at 09 46 13" src="https://github.com/user-attachments/assets/3b03877a-13ae-4ecb-a295-179fdd3870c3" />
+<img width="753" height="471" alt="Red indicator" src="https://github.com/user-attachments/assets/3b03877a-13ae-4ecb-a295-179fdd3870c3" />
+
+## Getting started
+
+1. Open a **folder** that contains a Git repository (not only loose files).
+2. Ensure your **base branch** exists locally (for example `main` or `develop`), or fetch it—otherwise the status text shows that the base was not found.
+3. Optional: open **Settings** and search for **Branch Size Monitor** to change the base branch and thresholds.
 
 ## Requirements
 
-- VS Code or Cursor
-- Extension: **statusbar-commands** (`anweber.statusbar-commands`)
-- Built-in Git extension (`vscode.git`) for optional Git-driven refresh events
-- Local branch **`main`** (or change the git command in `pr-size-statusbar.cjs`)
-- Workspace with at least one folder open (scripts use `workspaceFolders[0]`)
-- Trusted workspace if your editor requires it for extension script execution
+- A **Git** repository in the opened workspace.
+- The built-in **Git** extension (`vscode.git`) enabled, for timely refresh when the repository changes.
 
-## Installation
-1. Install [statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands).
-2. Copy `pr-size-statusbar.cjs` and `pr-size-statusbar-git-events.cjs` into **`.vscode/`**.
-3. Add the `statusbar_command.commands` block from `settings.cjson` into your workspace settings. Adjust or remove unrelated keys (formatters, etc.) if you only want the status bar.
-4. Reload the window if needed.
+## Development
 
-## Files in this bundle
+Go to the (repository)[https://github.com/lucassegundo/vscode-status-bar-git-files-changed] and clone it to your local machine.
 
-| File                              | Purpose                                                                                                 |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `pr-size-statusbar.cjs`            | Runs `git diff --name-only main...HEAD \| wc -l` and sets `statusBarItem.text`.                         |
-| `pr-size-statusbar-git-events.cjs` | Supplies Git-related `scriptEvents` subscribers for statusbar-commands (see below).                     |
-| `settings.cjson` (fragment)        | Registers the status bar item, `scriptEvents`, and the inline `script` that `require`s the files above. |
-
-## What gets measured
-
-The script runs (in the first workspace folder):
-
-```bash
-git diff --name-only main...HEAD 2>/dev/null | wc -l
-```
-
-That is the **three-dot** diff vs `main` (commits on your branch relative to `main`), not “every unsaved buffer change.”
-
-## When the label refreshes
-
-From `settings.cjson` `scriptEvents`:
-
-- **`vscode.window.onDidChangeWindowState`** — e.g. after git in the terminal, when you focus the editor again.
-- **`vscode.workspace.onDidChangeWorkspaceFolders`** — workspace roots change.
-- **`onDidOpenRepository`** / **`onDidChangeRepositoryState`** — loaded from `pr-size-statusbar-git-events.cjs` (see next section).
-
-Clicking the item runs **`workbench.view.scm`** (Source Control). Change `command` in settings to use another command.
-
-## Git events module (`pr-size-statusbar-git-events.cjs`)
-
-`main()` resolves the Git extension API and `repositories[0]`.
-
-- If **both** the Git API and **`repositories[0]`** exist, the exported subscribers are the real **`onDidOpenRepository`** and **`repo.state.onDidChange`**.
-- Otherwise **both** exports are **no-op** subscribers so statusbar-commands can still register without throwing.
-
-The module is evaluated once on first `require`; if Git was not ready yet, reload the window.
-
-## Thresholds and errors
-
-- On failure (e.g. no `main`), the bar shows **`main not found`**.
-
-## Troubleshooting
-
-- **View → Output** → channel **“statusbarcommands”** for extension messages.
-- **Help → Toggle Developer Tools → Console** for `console.log` from required scripts (extension host).
+1. Install dependencies: `pnpm install`
+2. **Run → Start Debugging** (or **Run Extension**): Go to Run and Start Debugging, and run the extension in watch mode. The extension will be built and launched in a new VS Code window to be used for testing.
 
 ## License
 
