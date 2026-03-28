@@ -1,7 +1,7 @@
 {
   "name": "git-pr-size-statusbar",
-  "displayName": "Git PR size (status bar)",
-  "description": "Shows how many files differ between your branch and a base branch (three-dot git diff) in the status bar.",
+  "displayName": "Branch Size Monitor",
+  "description": "Shows how many files differ between your branch and a base branch in the status bar.",
   "version": "0.1.0",
   "publisher": "lucassegundo",
   "license": "MIT",
@@ -21,13 +21,13 @@
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Git PR size",
+      "title": "Branch Size Monitor",
       "properties": {
         "prSizeStatusBar.yellowThreshold": {
           "type": "number",
           "default": 20,
           "minimum": 0,
-          "description": "Above this count (and ≤ red threshold), the indicator is yellow."
+          "description": "Above this count and less than or equal to the red threshold, the indicator is yellow."
         },
         "prSizeStatusBar.redThreshold": {
           "type": "number",
