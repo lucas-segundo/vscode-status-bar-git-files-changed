@@ -9,10 +9,10 @@ VS Code extension that shows how many files differ between your current branch a
 
 ## Development
 
-1. `npm install`
+1. `pnpm install`
 2. **Run → Start Debugging** (or **Run Extension**): compiles with the default build task and opens an Extension Development Host.
-3. `npm run compile` — one-off TypeScript build.
-4. Package: install [`@vscode/vsce`](https://github.com/microsoft/vscode-vsce) and run `vsce package` (or `npm run package` if `vsce` is on your `PATH`).
+3. `pnpm run compile` — one-off TypeScript build.
+4. Package: install [`@vscode/vsce`](https://github.com/microsoft/vscode-vsce) and run `vsce package` (or `pnpm run package` if `vsce` is on your `PATH`).
 
 ## License
 

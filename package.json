@@ -10,6 +10,7 @@
     "type": "git",
     "url": "https://github.com/lucassegundo/vscode-status-bar-git-files-changed.git"
   },
+  "packageManager": "pnpm@10.27.0",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -48,7 +49,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "pnpm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "package": "vsce package"
