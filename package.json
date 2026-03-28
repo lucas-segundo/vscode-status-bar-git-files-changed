@@ -23,22 +23,22 @@
     "configuration": {
       "title": "Branch Size Monitor",
       "properties": {
-        "prSizeStatusBar.yellowThreshold": {
+        "statusBar.yellowThreshold": {
           "type": "number",
           "default": 20,
           "minimum": 0,
           "description": "Above this count and less than or equal to the red threshold, the indicator is yellow."
         },
-        "prSizeStatusBar.redThreshold": {
+        "statusBar.redThreshold": {
           "type": "number",
           "default": 30,
           "minimum": 0,
           "description": "Above this count, the indicator is red."
         },
-        "prSizeStatusBar.baseBranch": {
+        "baseBranch": {
           "type": "string",
           "default": "main",
-          "description": "Base branch for the three-dot diff (git diff base...HEAD)."
+          "description": "Base branch for comparing the size of the current branch."
         }
       }
     }
