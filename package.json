@@ -1,5 +1,5 @@
 {
-  "name": "git-pr-size-statusbar",
+  "name": "branch-size-monitor",
   "displayName": "Branch Size Monitor",
   "description": "Shows how many files differ between your branch and a base branch in the status bar.",
   "version": "0.2.0",
