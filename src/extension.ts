@@ -1,7 +1,7 @@
 import * as cp from 'child_process'
 import * as vscode from 'vscode'
 
-const SECTION = 'prSizeStatusBar'
+const SECTION = 'statusBar'
 
 let statusBarItem: vscode.StatusBarItem | undefined
 let gitDisposables: vscode.Disposable[] = []
