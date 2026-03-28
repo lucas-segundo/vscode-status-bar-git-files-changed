@@ -3,6 +3,7 @@
   "displayName": "Branch Size Monitor",
   "description": "Shows how many files differ between your branch and a base branch in the status bar.",
   "version": "0.1.0",
+  "icon": "icon.png",
   "publisher": "lucassegundo",
   "license": "MIT",
   "repository": {
