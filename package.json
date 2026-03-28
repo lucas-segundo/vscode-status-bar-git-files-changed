@@ -1,0 +1,58 @@
+{
+  "name": "git-pr-size-statusbar",
+  "displayName": "Git PR size (status bar)",
+  "description": "Shows how many files differ between your branch and a base branch (three-dot git diff) in the status bar.",
+  "version": "0.1.0",
+  "publisher": "lucassegundo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucassegundo/vscode-status-bar-git-files-changed.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Git PR size",
+      "properties": {
+        "prSizeStatusBar.yellowThreshold": {
+          "type": "number",
+          "default": 20,
+          "minimum": 0,
+          "description": "Above this count (and ≤ red threshold), the indicator is yellow."
+        },
+        "prSizeStatusBar.redThreshold": {
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "description": "Above this count, the indicator is red."
+        },
+        "prSizeStatusBar.baseBranch": {
+          "type": "string",
+          "default": "main",
+          "description": "Base branch for the three-dot diff (git diff base...HEAD)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.26.1",
+    "typescript": "^5.3.3"
+  }
+}
