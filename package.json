@@ -24,6 +24,14 @@
     "configuration": {
       "title": "Branch Size Monitor",
       "properties": {
+        "baseBranch": {
+          "type": "string",
+          "default": "main",
+          "description": "Base branch for comparing the size of the current branch."
+        },
+        "statusBar.greenThreshold": {
+          "description": "Indicator is green when yellow or red threshold is not met."
+        },
         "statusBar.yellowThreshold": {
           "type": "number",
           "default": 20,
@@ -35,11 +43,6 @@
           "default": 30,
           "minimum": 0,
           "description": "Above this count, the indicator is red."
-        },
-        "baseBranch": {
-          "type": "string",
-          "default": "main",
-          "description": "Base branch for comparing the size of the current branch."
         }
       }
     }
