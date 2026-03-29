@@ -1,14 +1,14 @@
 import { Subscriber } from '..'
-import { BranchSizeMonitor } from '../../BranchSizeMonitor'
+import { FilesChangedStatusBar } from '../../FilesChangedStatusBar'
 import { GitDiffCounter } from '../../GitDiffCounter'
 
 export class FilesChangedStatusBarSubscriber implements Subscriber {
   constructor(
-    private readonly branchSizeMonitor: BranchSizeMonitor,
+    private readonly filesChangedStatusBar: FilesChangedStatusBar,
     private readonly gitDiffCounter: GitDiffCounter,
   ) {}
 
   notify(): void {
-    this.branchSizeMonitor.updateStatusBar(this.gitDiffCounter.count())
+    this.filesChangedStatusBar.updateStatusBar(this.gitDiffCounter.count())
   }
 }

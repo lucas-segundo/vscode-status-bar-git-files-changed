@@ -1,10 +1,10 @@
 import { FilesChangedStatusBarSubscriber } from '.'
-import { BranchSizeMonitor } from '../../BranchSizeMonitor'
+import { FilesChangedStatusBar } from '../../FilesChangedStatusBar'
 import { GitDiffCounter } from '../../GitDiffCounter'
 
 export const makeFilesChangedStatusBarSubscriber = () => {
   return new FilesChangedStatusBarSubscriber(
-    new BranchSizeMonitor(),
+    new FilesChangedStatusBar(),
     new GitDiffCounter(),
   )
 }
