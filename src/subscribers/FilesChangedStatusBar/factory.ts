@@ -1,6 +1,6 @@
 import { FilesChangedStatusBarSubscriber } from '.'
-import { FilesChangedStatusBar } from '../../FilesChangedStatusBar'
-import { GitDiffCounter } from '../../GitDiffCounter'
+import { FilesChangedStatusBar } from '../../components/FilesChangedStatusBar'
+import { GitDiffCounter } from '../../services/GitDiffCounter'
 
 export const makeFilesChangedStatusBarSubscriber = () => {
   return new FilesChangedStatusBarSubscriber(

@@ -1,6 +1,6 @@
 import * as cp from 'child_process'
 import { workspace, WorkspaceFolder } from 'vscode'
-import { getSettings } from './utils/getSettings'
+import { getSettings } from '../utils/getSettings'
 
 export class GitDiffCounter {
   private workspaceFolders: readonly WorkspaceFolder[]

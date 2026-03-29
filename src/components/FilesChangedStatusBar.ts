@@ -1,5 +1,5 @@
 import { StatusBarAlignment, StatusBarItem, window } from 'vscode'
-import { getSettings } from './utils/getSettings'
+import { getSettings } from '../utils/getSettings'
 
 export class FilesChangedStatusBar {
   private statusBarItem: StatusBarItem

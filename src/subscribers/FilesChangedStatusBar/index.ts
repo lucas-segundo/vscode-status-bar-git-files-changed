@@ -1,6 +1,6 @@
 import { Subscriber } from '..'
-import { FilesChangedStatusBar } from '../../FilesChangedStatusBar'
-import { GitDiffCounter } from '../../GitDiffCounter'
+import { FilesChangedStatusBar } from '../../components/FilesChangedStatusBar'
+import { GitDiffCounter } from '../../services/GitDiffCounter'
 
 export class FilesChangedStatusBarSubscriber implements Subscriber {
   constructor(
