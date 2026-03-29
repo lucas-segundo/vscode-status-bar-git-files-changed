@@ -13,12 +13,15 @@ See at a glance how many files differ between your **current branch** and a **ba
 ## Screenshots
 
 ### Green indicator
+
 <img width="753" height="471" alt="Green indicator" src="https://github.com/user-attachments/assets/47785146-4fc5-465e-83b2-581cede16c23" />
 
 ### Yellow indicator
+
 <img width="753" height="471" alt="Yellow indicator" src="https://github.com/user-attachments/assets/c9174423-300d-45a7-82d4-8581f6da4785" />
 
 ### Red indicator
+
 <img width="753" height="471" alt="Red indicator" src="https://github.com/user-attachments/assets/3b03877a-13ae-4ecb-a295-179fdd3870c3" />
 
 ## Getting started

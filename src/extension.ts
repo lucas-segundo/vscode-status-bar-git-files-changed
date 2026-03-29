@@ -7,8 +7,12 @@ let statusBarItem: vscode.StatusBarItem | undefined
 let gitDisposables: vscode.Disposable[] = []
 
 export function activate(context: vscode.ExtensionContext): void {
-  statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100)
-  statusBarItem.tooltip = 'Files changed vs base branch (three-dot diff). Click: Source Control.'
+  statusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Left,
+    100,
+  )
+  statusBarItem.tooltip =
+    'Files changed vs base branch (three-dot diff). Click: Source Control.'
   statusBarItem.command = 'workbench.view.scm'
   context.subscriptions.push(statusBarItem)
 
@@ -33,7 +37,7 @@ export function activate(context: vscode.ExtensionContext): void {
         update()
       }
     }),
-    new vscode.Disposable(() => clearGitDisposables())
+    new vscode.Disposable(() => clearGitDisposables()),
   )
 }
 
@@ -42,7 +46,11 @@ export function deactivate(): void {
   statusBarItem = undefined
 }
 
-function getConfig(): { yellowThreshold: number; redThreshold: number; baseBranch: string } {
+function getConfig(): {
+  yellowThreshold: number
+  redThreshold: number
+  baseBranch: string
+} {
   const c = vscode.workspace.getConfiguration(SECTION)
   return {
     yellowThreshold: c.get<number>('yellowThreshold', 20),
@@ -71,7 +79,12 @@ function updateStatusBar(item: vscode.StatusBarItem): void {
       maxBuffer: 32 * 1024 * 1024,
       stdio: ['ignore', 'pipe', 'pipe'],
     })
-    const count = stdout.trim() ? stdout.trim().split('\n').filter((line) => line.length > 0).length : 0
+    const count = stdout.trim()
+      ? stdout
+          .trim()
+          .split('\n')
+          .filter((line) => line.length > 0).length
+      : 0
 
     let icon = '🟢'
     if (count > redThreshold) {
@@ -141,6 +154,6 @@ async function wireGitListeners(update: () => void): Promise<void> {
     api.onDidOpenRepository((repo) => {
       wireRepo(repo)
       update()
-    })
+    }),
   )
 }

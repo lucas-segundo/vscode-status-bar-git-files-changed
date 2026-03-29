@@ -30,10 +30,9 @@ yarn.lock
 *.log
 .pnpm-store/**
 
-# Optional tooling configs if you add them later
+# ESLint and Prettier configs
 .editorconfig
 .prettier*
 eslint.config.*
 .eslintrc*
-coverage/**
-.nyc_output/**
+
