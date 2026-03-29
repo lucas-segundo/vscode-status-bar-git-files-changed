@@ -1,31 +1,20 @@
-import * as cp from 'child_process'
 import * as vscode from 'vscode'
+import { BranchSizeMonitor } from './BranchSizeMonitor'
+import { SETTINGS_SECTION } from './constants'
 
-const SECTION = 'statusBar'
-
-let statusBarItem: vscode.StatusBarItem | undefined
+const branchSizeMonitor = new BranchSizeMonitor()
 let gitDisposables: vscode.Disposable[] = []
 
+function update(): void {
+  branchSizeMonitor.update()
+}
+
 export function activate(context: vscode.ExtensionContext): void {
-  statusBarItem = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Left,
-    100,
-  )
-  statusBarItem.tooltip =
-    'Files changed vs base branch (three-dot diff). Click: Source Control.'
-  statusBarItem.command = 'workbench.view.scm'
-  context.subscriptions.push(statusBarItem)
-
-  const update = (): void => {
-    if (statusBarItem) {
-      updateStatusBar(statusBarItem)
-    }
-  }
-
   update()
   void wireGitListeners(update)
 
   context.subscriptions.push(
+    branchSizeMonitor,
     vscode.window.onDidChangeWindowState(() => update()),
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
       clearGitDisposables()
@@ -33,7 +22,7 @@ export function activate(context: vscode.ExtensionContext): void {
       update()
     }),
     vscode.workspace.onDidChangeConfiguration((e) => {
-      if (e.affectsConfiguration(SECTION)) {
+      if (e.affectsConfiguration(SETTINGS_SECTION)) {
         update()
       }
     }),
@@ -43,60 +32,6 @@ export function activate(context: vscode.ExtensionContext): void {
 
 export function deactivate(): void {
   clearGitDisposables()
-  statusBarItem = undefined
-}
-
-function getConfig(): {
-  yellowThreshold: number
-  redThreshold: number
-  baseBranch: string
-} {
-  const c = vscode.workspace.getConfiguration(SECTION)
-  return {
-    yellowThreshold: c.get<number>('yellowThreshold', 20),
-    redThreshold: c.get<number>('redThreshold', 30),
-    baseBranch: c.get<string>('baseBranch', 'main'),
-  }
-}
-
-function updateStatusBar(item: vscode.StatusBarItem): void {
-  const folders = vscode.workspace.workspaceFolders
-  if (!folders?.length) {
-    item.hide()
-    return
-  }
-
-  item.show()
-
-  const { yellowThreshold, redThreshold, baseBranch } = getConfig()
-  const cwd = folders[0].uri.fsPath
-  const cmd = `git diff --name-only ${baseBranch}...HEAD`
-
-  try {
-    const stdout = cp.execSync(cmd, {
-      cwd,
-      encoding: 'utf8',
-      maxBuffer: 32 * 1024 * 1024,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-    const count = stdout.trim()
-      ? stdout
-          .trim()
-          .split('\n')
-          .filter((line) => line.length > 0).length
-      : 0
-
-    let icon = '🟢'
-    if (count > redThreshold) {
-      icon = '🔴'
-    } else if (count > yellowThreshold) {
-      icon = '🟡'
-    }
-
-    item.text = `${icon} PR: ${count} files changed`
-  } catch {
-    item.text = `⚪ PR: ${baseBranch} not found`
-  }
 }
 
 function clearGitDisposables(): void {
