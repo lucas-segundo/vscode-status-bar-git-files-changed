@@ -15,18 +15,20 @@ export class GitOnChangePublisher implements vscode.Disposable {
   private gitDisposables: vscode.Disposable[] = []
   private readonly subscribers = new Set<() => void>()
 
-  async addSubscriber(listener: () => void): Promise<vscode.Disposable> {
-    this.subscribers.add(listener)
+  async addSubscribers(
+    ...listeners: (() => void)[]
+  ): Promise<vscode.Disposable> {
+    for (const listener of listeners) {
+      this.subscribers.add(listener)
+    }
     await this.wire()
 
-    return new vscode.Disposable(() => {
-      this.subscribers.delete(listener)
-    })
+    return new vscode.Disposable(() =>
+      listeners.forEach((listener) => this.subscribers.delete(listener)),
+    )
   }
 
-  private async wire(): Promise<void> {
-    this.clearGitDisposables()
-
+  async wire(): Promise<void> {
     const ext = vscode.extensions.getExtension<{
       getAPI(version: number): GitApi | undefined
     }>('vscode.git')

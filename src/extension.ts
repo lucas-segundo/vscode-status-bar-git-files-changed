@@ -14,13 +14,13 @@ function update(): void {
 const gitOnChangePublisher = new GitOnChangePublisher()
 
 export function activate(context: vscode.ExtensionContext): void {
-  gitOnChangePublisher.addSubscriber(update)
+  gitOnChangePublisher.addSubscribers(update)
 
   context.subscriptions.push(
     gitOnChangePublisher,
     vscode.window.onDidChangeWindowState(() => update()),
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
-      gitOnChangePublisher.addSubscriber(update)
+      gitOnChangePublisher.wire()
     }),
     vscode.workspace.onDidChangeConfiguration((e) => {
       if (e.affectsConfiguration(SETTINGS_SECTION)) {
