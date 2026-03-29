@@ -40,9 +40,10 @@ export class BranchSizeMonitor implements Disposable {
       const count = this.getGitDiffCount(folders, baseBranch)
       const icon = this.getIcon(count, redThreshold, yellowThreshold)
 
-      this.statusBarItem.text = `${icon} ${count} files changed`
+      this.statusBarItem.text = `${icon} ${count} ${count === 1 ? 'file' : 'files'} changed`
     } catch {
       this.statusBarItem.text = `⚪ Base branch ${baseBranch} not found`
+      this.statusBarItem.tooltip = `Check if the base branch ${baseBranch} exists locally. If not, go to settings and set the base branch.`
     } finally {
       this.statusBarItem.show()
     }
