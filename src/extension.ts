@@ -2,11 +2,13 @@ import * as vscode from 'vscode'
 import { BranchSizeMonitor } from './BranchSizeMonitor'
 import { GitOnChangePublisher } from './GitOnChangePublisher'
 import { SETTINGS_SECTION } from './constants'
+import { GitDiffCounter } from './GitDiffCounter'
 
 const branchSizeMonitor = new BranchSizeMonitor()
+const gitDiffCounter = new GitDiffCounter()
 
 function update(): void {
-  branchSizeMonitor.update()
+  branchSizeMonitor.updateStatusBar(gitDiffCounter.count())
 }
 
 const gitOnChangePublisher = new GitOnChangePublisher()

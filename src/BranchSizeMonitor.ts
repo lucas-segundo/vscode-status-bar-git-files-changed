@@ -1,12 +1,4 @@
-import * as cp from 'child_process'
-import {
-  Disposable,
-  StatusBarAlignment,
-  StatusBarItem,
-  window,
-  workspace,
-  WorkspaceFolder,
-} from 'vscode'
+import { Disposable, StatusBarAlignment, StatusBarItem, window } from 'vscode'
 import { getSettings } from './getSettings'
 
 export class BranchSizeMonitor implements Disposable {
@@ -22,54 +14,23 @@ export class BranchSizeMonitor implements Disposable {
     this.statusBarItem.command = 'workbench.view.scm'
   }
 
-  update(): void {
-    const folders = workspace.workspaceFolders
-    const hasNoFolders = !folders?.length
-
-    if (hasNoFolders) {
-      this.statusBarItem.text = `⚪ No workspace folders found`
-    } else {
-      this.updateWithFolders(folders)
-    }
-  }
-
-  private updateWithFolders(folders: readonly WorkspaceFolder[]) {
+  updateStatusBar(filesChangedCount: number) {
     const { yellowThreshold, redThreshold, baseBranch } = getSettings()
 
     try {
-      const count = this.getGitDiffCount(folders, baseBranch)
-      const icon = this.getIcon(count, redThreshold, yellowThreshold)
+      const icon = this.getIcon(
+        filesChangedCount,
+        redThreshold,
+        yellowThreshold,
+      )
 
-      this.statusBarItem.text = `${icon} ${count} ${count === 1 ? 'file' : 'files'} changed`
+      this.statusBarItem.text = `${icon} ${filesChangedCount} ${filesChangedCount === 1 ? 'file' : 'files'} changed`
     } catch {
       this.statusBarItem.text = `⚪ Base branch ${baseBranch} not found`
       this.statusBarItem.tooltip = `Check if the base branch ${baseBranch} exists locally. If not, go to settings and set the base branch.`
     } finally {
       this.statusBarItem.show()
     }
-  }
-
-  private getGitDiffCount(
-    folders: readonly WorkspaceFolder[],
-    baseBranch: string,
-  ): number {
-    const cwd = folders[0].uri.fsPath
-    const cmd = `git diff --name-only ${baseBranch}...HEAD`
-    const stdout = cp.execSync(cmd, {
-      cwd,
-      encoding: 'utf8',
-      maxBuffer: 32 * 1024 * 1024,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-
-    if (stdout.trim()) {
-      return stdout
-        .trim()
-        .split('\n')
-        .filter((line) => line.length > 0).length
-    }
-
-    return 0
   }
 
   private getIcon(
