@@ -1,6 +1,6 @@
 {
-  "name": "branch-size-monitor",
-  "displayName": "Branch Size Monitor",
+  "name": "branchlite",
+  "displayName": "BranchLite",
   "description": "Shows how many files differ between your branch and a base branch in the status bar.",
   "version": "0.3.0",
   "icon": "icon.png",
@@ -23,7 +23,7 @@
   "main": "./out/index.js",
   "contributes": {
     "configuration": {
-      "title": "Branch Size Monitor",
+      "title": "BranchLite",
       "properties": {
         "statusBar.baseBranch": {
           "type": "string",

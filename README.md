@@ -1,4 +1,4 @@
-# Branch Size Monitor
+# BranchLite
 
 See at a glance how many files differ between your **current branch** and a **base branch** (for example `main`)—right in the status bar. Handy for keeping pull requests and branch scope easy to spot while you work and make it smaller.
 
@@ -28,7 +28,7 @@ See at a glance how many files differ between your **current branch** and a **ba
 
 1. Open a **folder** that contains a Git repository (not only loose files).
 2. Ensure your **base branch** exists locally (for example `main` or `develop`), or fetch it—otherwise the status text shows that the base was not found.
-3. Optional: open **Settings** and search for **Branch Size Monitor** to change the base branch and thresholds.
+3. Optional: open **Settings** and search for **BranchLite** to change the base branch and thresholds.
 
 ## Requirements
 
