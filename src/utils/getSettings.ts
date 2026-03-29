@@ -1,5 +1,5 @@
 import { workspace } from 'vscode'
-import { SETTINGS_SECTION } from './constants'
+import { SETTINGS_SECTION } from '../constants'
 
 export function getSettings(): {
   yellowThreshold: number

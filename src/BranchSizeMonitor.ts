@@ -1,5 +1,5 @@
 import { StatusBarAlignment, StatusBarItem, window } from 'vscode'
-import { getSettings } from './getSettings'
+import { getSettings } from './utils/getSettings'
 
 export class BranchSizeMonitor {
   private statusBarItem: StatusBarItem
