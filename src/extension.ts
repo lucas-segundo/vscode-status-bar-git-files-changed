@@ -17,7 +17,6 @@ export function activate(context: vscode.ExtensionContext): void {
   gitOnChangePublisher.addSubscriber(update)
 
   context.subscriptions.push(
-    branchSizeMonitor,
     gitOnChangePublisher,
     vscode.window.onDidChangeWindowState(() => update()),
     vscode.workspace.onDidChangeWorkspaceFolders(() => {

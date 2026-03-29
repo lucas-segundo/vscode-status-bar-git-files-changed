@@ -1,7 +1,7 @@
-import { Disposable, StatusBarAlignment, StatusBarItem, window } from 'vscode'
+import { StatusBarAlignment, StatusBarItem, window } from 'vscode'
 import { getSettings } from './getSettings'
 
-export class BranchSizeMonitor implements Disposable {
+export class BranchSizeMonitor {
   private statusBarItem: StatusBarItem
 
   constructor() {
@@ -45,9 +45,5 @@ export class BranchSizeMonitor implements Disposable {
     }
 
     return '🟢'
-  }
-
-  dispose(): void {
-    this.statusBarItem.dispose()
   }
 }
