@@ -37,7 +37,7 @@ See at a glance how many files differ between your **current branch** and a **ba
 
 ## Development
 
-Go to the [repository](https://github.com/lucassegundo/vscode-status-bar-git-files-changed) and clone it to your local machine.
+Go to the [repository](https://github.com/lucas-segundo/vscode-status-bar-git-files-changed) and clone it to your local machine.
 
 1. Install dependencies: `pnpm install`
 2. **Run → Start Debugging** (or **Run Extension**): Go to Run and Start Debugging, and run the extension in watch mode. The extension will be built and launched in a new VS Code window to be used for testing.
