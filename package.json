@@ -2,13 +2,13 @@
   "name": "branchlite",
   "displayName": "BranchLite",
   "description": "Shows how many files differ between your branch and a base branch in the status bar.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "icon": "icon.png",
-  "publisher": "lucassegundo",
+  "publisher": "lucas-segundo",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucassegundo/vscode-status-bar-git-files-changed.git"
+    "url": "https://github.com/lucas-segundo/vscode-status-bar-git-files-changed.git"
   },
   "packageManager": "pnpm@10.27.0",
   "engines": {
