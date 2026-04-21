@@ -1,6 +1,7 @@
+import { workspace } from 'vscode'
 import { Subscriber } from '..'
 import { FilesChangedStatusBar } from '../../components/FilesChangedStatusBar'
-import { GitDiffCounter } from '../../services/GitDiffCounter'
+import { getFocusedWorkspaceFolder, GitDiffCounter } from '../../services/GitDiffCounter'
 
 export class FilesChangedStatusBarSubscriber implements Subscriber {
   constructor(
@@ -9,6 +10,11 @@ export class FilesChangedStatusBarSubscriber implements Subscriber {
   ) {}
 
   notify(): void {
-    this.filesChangedStatusBar.updateStatusBar(this.gitDiffCounter.count())
+    const count = this.gitDiffCounter.count()
+    const multiRoot = (workspace.workspaceFolders?.length ?? 0) > 1
+    this.filesChangedStatusBar.updateStatusBar(
+      count,
+      multiRoot ? getFocusedWorkspaceFolder() : undefined,
+    )
   }
 }
